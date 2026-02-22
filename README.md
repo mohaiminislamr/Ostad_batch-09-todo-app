@@ -2,7 +2,7 @@
 
 A complete Todo web application built with Django, featuring a modern UI with Tailwind CSS.
 
-#Update from Mohaiminul Islam.Student Ostad-batch-10
+# Update from Mohaiminul Islam.Student Ostad-batch-10
 
  Django Todo Application
 1. I deployed the Todo application using free hosting provider vercel.
