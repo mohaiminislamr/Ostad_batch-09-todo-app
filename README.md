@@ -2,6 +2,27 @@
 
 A complete Todo web application built with Django, featuring a modern UI with Tailwind CSS.
 
+#Update from Mohaiminul Islam.Student Ostad-batch-10
+
+ Django Todo Application
+1. I deployed the Todo application using free hosting provider vercel.
+
+Originally planned for Heroku, the deployment was shifted to **Vercel** due to Heroku's new mandatory credit card verification and paid-only policy. The project is fully optimized for Vercel using `vercel.json`.
+
+Live deployed application URL: https://ostad-batch-09-one.vercel.app/
+
+Description:
+
+This is a robust and user-friendly **Todo Application** developed as part of the **Ostad Batch-09** assignment. Built using the **Django Web Framework**, the application is designed to help users organize their daily lives by managing tasks effectively. 
+Users can easily add new tasks, track their progress, and stay productive through a clean and intuitive interface. The project demonstrates the implementation of Django's CRUD (Create, Read, Update, Delete) capabilities, template rendering, and seamless deployment workflows.
+
+How  i deployed it locally:
+1. Clone the repo: https://github.com/latifurrafi/Ostad_batch-09.git
+2. Install dependencies: pip install -r requirements.txt
+3. Run migrations: python3 manage.py migrate
+4. Start server: python3 manage.py runserver
+# Mohaiminul's Update Finished Here.
+
 ## Features
 
 - ✅ Create, Read, Update, and Delete tasks
