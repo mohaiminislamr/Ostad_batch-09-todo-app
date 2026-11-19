@@ -1,4 +1,4 @@
-name: Django CI/CD (runserver)
+name: Build and Deploy on Office Windows PC
 
 on:
   push:
@@ -6,23 +6,26 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
+  build-and-deploy:
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v1.0.0
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            cd ~/Ostad_batch-09
-            source venv/bin/activate
-            git pull origin main
-            pip install -r requirements.txt
-            pkill -f runserver || true
-            nohup python manage.py runserver 0.0.0.0:8000 > server.log 2>&1 &
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/django-todo-app:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/django-todo-app:latest
+
+      - name: Restart container with persistent data
+        shell: powershell
+        run: |
+          New-Item -Path "C:\MyTodoDB" -ItemType Directory -Force | Out-Null
+          docker rm -f todo-container -ErrorAction SilentlyContinue
+          docker run -d --name todo-container -p 8000:8000 -v "C:\MyTodoDB:/app/data" ${{ secrets.DOCKERHUB_USERNAME }}/django-todo-app:latest
