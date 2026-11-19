@@ -27,5 +27,5 @@ jobs:
         shell: powershell
         run: |
           New-Item -Path "C:\MyTodoDB" -ItemType Directory -Force | Out-Null
-          docker rm -f todo-container -ErrorAction SilentlyContinue
+          docker rm -f todo-container 2>$null
           docker run -d --name todo-container -p 8000:8000 -v "C:\MyTodoDB:/app/data" ${{ secrets.DOCKERHUB_USERNAME }}/django-todo-app:latest
