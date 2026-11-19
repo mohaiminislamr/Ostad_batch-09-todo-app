@@ -35,5 +35,5 @@ jobs:
             -p 8000:8000 `
             -v "C:\MyTodoDB:/app/data" `
             ${{ secrets.DOCKERHUB_USERNAME }}/django-todo-app:latest
-          python manage.py migrate
-          
+          Start-Sleep -Seconds 3
+          docker exec todo-container python manage.py migrate
